@@ -1,4 +1,4 @@
-ARMGNU ?= /usr/arm-linux-gnurabi/bin/
+ARMGNU ?= /usr/arm-linux-gnueabi/bin/
 
 BUILD = build/
 
