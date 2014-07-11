@@ -1,4 +1,4 @@
-ARMGNU ?= /usr/arm-linux-gnueabi/bin/
+ARMGNU ?= arm-none-eabi
 
 BUILD = build/
 
@@ -19,16 +19,16 @@ all : $(TARGET) $(LIST)
 rebuild: all
 
 $(LIST) : $(BUILD)output.elf
-		$(ARMGNU)objdump -d $(BUILD)output.elf > $(LIST)
+		$(ARMGNU)-objdump -d $(BUILD)output.elf > $(LIST)
 		
 $(TARGET) : $(BUILD)output.elf
-		$(ARMGNU)objcopy $(BUILD)output.elf -O binary $(TARGET)
+		$(ARMGNU)-objcopy $(BUILD)output.elf -O binary $(TARGET)
 		
 $(BUILD)output.elf : $(OBJECTS) $(LINKER)
-		$(ARMGNU)ld --no-undefined $(OBJECTS) -Map $(MAP) -o $(BUILD)output.elf -T $(LINKER)
+		$(ARMGNU)-ld --no-undefined $(OBJECTS) -Map $(MAP) -o $(BUILD)output.elf -T $(LINKER)
 		
 $(BUILD)%.o: $(SOURCE)%.s $(BUILD)
-		$(ARMGNU)as -I $(SOURCE) $< -o $@
+		$(ARMGNU)-as -I $(SOURCE) $< -o $@
 		
 $(BUILD):
 		mkdir $@
